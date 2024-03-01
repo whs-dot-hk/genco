@@ -89,12 +89,13 @@ impl_lang! {
 
     Import {
         fn format(&self, out: &mut fmt::Formatter<'_>, _: &Config, _: &Format) -> fmt::Result {
-            if let Some(module) = self.module.rsplit(MODULE_SEP).next() {
+            if !&self.name.is_empty() {
+            out.write_str(&self.name)?;
+            }
+            else if let Some(module) = self.module.rsplit(MODULE_SEP).next() {
                 out.write_str(module)?;
-                out.write_str(SEP)?;
             }
 
-            out.write_str(&self.name)?;
             Ok(())
         }
     }
@@ -158,10 +159,10 @@ impl Go {
 /// ```
 /// use genco::prelude::*;
 ///
-/// let ty = go::import("foo/bar", "Debug");
+/// let bar = go::import("foo/bar", "");
 ///
 /// let toks = quote! {
-///     $ty
+///     $bar.Debug
 /// };
 ///
 /// assert_eq!(
