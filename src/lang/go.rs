@@ -90,7 +90,7 @@ impl_lang! {
     Import {
         fn format(&self, out: &mut fmt::Formatter<'_>, _: &Config, _: &Format) -> fmt::Result {
             if !&self.name.is_empty() {
-            out.write_str(&self.name)?;
+                out.write_str(&self.name)?;
             }
             else if let Some(module) = self.module.rsplit(MODULE_SEP).next() {
                 out.write_str(module)?;
