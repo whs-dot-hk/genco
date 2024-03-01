@@ -49,8 +49,6 @@ use crate::tokens::{quoted, ItemStr};
 use std::collections::BTreeSet;
 use std::fmt::Write as _;
 
-const MODULE_SEP: &str = "/";
-
 /// Tokens container specialization for Go.
 pub type Tokens = crate::Tokens<Go>;
 
@@ -91,7 +89,7 @@ impl_lang! {
             if !&self.name.is_empty() {
                 out.write_str(&self.name)?;
             }
-            else if let Some(module) = self.module.rsplit(MODULE_SEP).next() {
+            else if let Some(module) = self.module.rsplit('/').next() {
                 out.write_str(module)?;
             }
 
