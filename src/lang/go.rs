@@ -50,7 +50,6 @@ use std::collections::BTreeSet;
 use std::fmt::Write as _;
 
 const MODULE_SEP: &str = "/";
-const SEP: &str = ".";
 
 /// Tokens container specialization for Go.
 pub type Tokens = crate::Tokens<Go>;
